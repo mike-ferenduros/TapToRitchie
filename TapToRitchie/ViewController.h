@@ -27,6 +27,9 @@
 	int								skipCounter;
 
 	UITapGestureRecognizer *		tapper;
+	UITapGestureRecognizer *		twoTapper;
+	
+	UILabel *						label;
 }
 
 - (id)init;

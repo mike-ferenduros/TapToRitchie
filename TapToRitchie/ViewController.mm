@@ -25,7 +25,7 @@
 
 - (void)loadView
 {
-	self.view = mainView = [[VideoView alloc] initWithFrame:CGRectMake(0,0,100,100)];
+	self.view = mainView = [[VideoView alloc] initWithFrame:CGRectMake(0,0,300,300)];
 
 	capSesh = [[AVCaptureSession alloc] init];
 	capSesh.sessionPreset = AVCaptureSessionPreset640x480;
@@ -45,10 +45,24 @@
 {
     [super viewDidLoad];
 
+	label = [[UILabel alloc] initWithFrame:CGRectInset(self.view.bounds,32,32)];
+	label.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+	label.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:32.0f];
+	label.textColor = [UIColor whiteColor];
+	label.backgroundColor = [UIColor clearColor];
+	label.contentMode = UIViewContentModeBottom;
+	label.numberOfLines = 3;
+	label.hidden = YES;
+	[self.view addSubview:label];
+
 	[capSesh startRunning];
 
 	tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
 	[self.view addGestureRecognizer:tapper];
+
+	twoTapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+	twoTapper.numberOfTouchesRequired = 2;
+	[self.view addGestureRecognizer:twoTapper];
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sbuf fromConnection:(AVCaptureConnection *)connection
@@ -105,18 +119,18 @@
 
 
 
-
-- (void)beginRitchie
+- (void)beginRitchie:(BOOL)isFemale
 {
-	NSLog(@"%@", [GangsterNamer randomName:NO]);
-
-	zoomStarted = [NSDate date];
-	zoomTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f/30.0f target:self selector:@selector(animTick:) userInfo:nil repeats:YES];
-	skipCounter = 0;
+	label.text = [[GangsterNamer randomName:isFemale] uppercaseString];
 
 	mainView.effect = EFFECT_HALFTONE;
 	[mainView setCol:0 R:0.2 g:0.2 b:0.2];
 	[mainView setCol:1 R:0.5 g:0.7 b:0.2];
+
+	zoomStarted = [NSDate date];
+	skipCounter = 0;
+
+	zoomTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f/30.0f target:self selector:@selector(animTick:) userInfo:nil repeats:YES];
 }
 
 - (void)endRitchie
@@ -125,14 +139,17 @@
 	zoomStarted = nil;
 	[zoomTimer invalidate];
 	zoomTimer = nil;
+	label.hidden = YES;
 }
 
 
 
 - (void)tapped:(UITapGestureRecognizer*)gest
 {
-	if( tapper.state==UIGestureRecognizerStateRecognized && !zoomStarted && bufferedFrames.empty() )
-		[self beginRitchie];
+	if( gest.state==UIGestureRecognizerStateRecognized && !zoomStarted && bufferedFrames.empty() )
+	{
+		[self beginRitchie:(gest==twoTapper)];
+	}
 }
 
 
@@ -150,16 +167,19 @@
 	}
 	else if( elapsed < ANIM_DURATION-ZOOM_DURATION )
 	{
+		label.hidden = NO;
 		if( mainView.zoom < ANIM_ZOOM )
 			mainView.zoom = ANIM_ZOOM;
 	}
 	else if( elapsed < ANIM_DURATION )
 	{
+		label.hidden = YES;
 		float t = (ANIM_DURATION-elapsed)/ZOOM_DURATION;
 		mainView.zoom = 1.0f + (ANIM_ZOOM-1.0f)*t;
 	}
 	else
 	{
+		label.hidden = YES;
 		[self endRitchie];
 	}
 }
