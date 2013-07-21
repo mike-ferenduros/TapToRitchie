@@ -96,6 +96,7 @@ static void check_gl_error( void )
 	{
 		[EAGLContext setCurrentContext:self.context];
 		passthroughShader = [self compileProgramWithFragShader:@"fragment_passthru" vertShader:@"vertex"];
+		threshholdShader = [self compileProgramWithFragShader:@"fragment_threshhold" vertShader:@"vertex"];
 		[EAGLContext setCurrentContext:nil];
 
 		_zoom = 1.0f;
@@ -122,8 +123,20 @@ static void check_gl_error( void )
 
 - (void)setZoom:(float)z
 {
-	_zoom = z;
-	[self setNeedsDisplay];
+	if( _zoom != z )
+	{
+		_zoom = z;
+		[self setNeedsDisplay];
+	}
+}
+
+- (void)setEffect:(enum VideoEffect)e
+{
+	if( _effect != e )
+	{
+		_effect = e;
+		[self setNeedsDisplay];
+	}
 }
 
 - (void)reloadTexture
@@ -160,6 +173,13 @@ static void check_gl_error( void )
 	check_gl_error();
 }
 
+- (void)setCol:(int)c R:(float)r g:(float)g b:(float)b
+{
+	cols[c][0] = r;
+	cols[c][1] = g;
+	cols[c][2] = b;
+	[self setNeedsDisplay];
+}
 
 - (void)drawRect:(CGRect)rect
 {
@@ -173,9 +193,22 @@ static void check_gl_error( void )
 
 	glViewport( 0, 0, self.drawableWidth, self.drawableHeight );
 
-	GLuint shader = passthroughShader;
+	GLuint shader;
+	switch( _effect )
+	{
+		case EFFECT_NONE:
+			shader = passthroughShader;
+			break;
+
+		case EFFECT_THRESHHOLD:
+			shader = threshholdShader;
+			break;
+	}
 
 	glUseProgram( shader );
+	glUniform3f( glGetUniformLocation(shader,"col1"), cols[0][0], cols[0][1], cols[0][2] );
+	glUniform3f( glGetUniformLocation(shader,"col2"), cols[1][0], cols[1][1], cols[1][2] );
+
 
 	float z = _zoom;
 	float xy[4][2] = { {-z,-z}, {-z,z}, {z,-z}, {z,z} };

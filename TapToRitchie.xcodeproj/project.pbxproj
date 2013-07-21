@@ -25,6 +25,7 @@
 		7742E316179C637B00F5F27F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7742E315179C637B00F5F27F /* CoreMedia.framework */; };
 		7742E31D179C69C100F5F27F /* fragment_passthru.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 7742E31B179C69C100F5F27F /* fragment_passthru.glsl */; };
 		7742E31E179C69C100F5F27F /* vertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 7742E31C179C69C100F5F27F /* vertex.glsl */; };
+		774BA64F179C81A000029367 /* fragment_threshhold.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 774BA64E179C81A000029367 /* fragment_threshhold.glsl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		7742E315179C637B00F5F27F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		7742E31B179C69C100F5F27F /* fragment_passthru.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment_passthru.glsl; sourceTree = "<group>"; };
 		7742E31C179C69C100F5F27F /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
+		774BA64E179C81A000029367 /* fragment_threshhold.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment_threshhold.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				7742E31B179C69C100F5F27F /* fragment_passthru.glsl */,
+				774BA64E179C81A000029367 /* fragment_threshhold.glsl */,
 				7742E31C179C69C100F5F27F /* vertex.glsl */,
 			);
 			name = glsl;
@@ -195,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7742E2F2179C5F0000F5F27F /* InfoPlist.strings in Resources */,
+				774BA64F179C81A000029367 /* fragment_threshhold.glsl in Resources */,
 				7742E2FA179C5F0000F5F27F /* Default.png in Resources */,
 				7742E2FC179C5F0000F5F27F /* Default@2x.png in Resources */,
 				7742E2FE179C5F0000F5F27F /* Default-568h@2x.png in Resources */,
@@ -330,6 +334,7 @@
 				7742E309179C5F0000F5F27F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

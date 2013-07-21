@@ -45,7 +45,7 @@
     [super viewDidLoad];
 
 	[capSesh startRunning];
-	
+
 	tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
 	[self.view addGestureRecognizer:tapper];
 }
@@ -73,6 +73,10 @@
 
 	zoomStarted = [NSDate date];
 	zoomTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f/30.0f target:self selector:@selector(animTick:) userInfo:nil repeats:YES];
+
+	mainView.effect = EFFECT_THRESHHOLD;
+	[mainView setCol:0 R:0.2 g:0.2 b:0.2];
+	[mainView setCol:1 R:0.5 g:0.7 b:0.2];
 }
 
 
@@ -100,6 +104,7 @@
 	}
 	else
 	{
+		mainView.effect = EFFECT_NONE;
 		zoomStarted = nil;
 		[zoomTimer invalidate];
 		zoomTimer = nil;

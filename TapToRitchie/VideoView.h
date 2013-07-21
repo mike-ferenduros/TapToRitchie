@@ -16,11 +16,23 @@
 	GLuint					texture;
 	int						texWidth;
 	int						texHeight;
-	
+
 	GLuint					passthroughShader;
+	GLuint					threshholdShader;
+
+	float					cols[2][3];
 }
 
+enum VideoEffect
+{
+	EFFECT_NONE = 0,
+	EFFECT_THRESHHOLD,
+};
+
 @property (nonatomic) float zoom;
+@property (nonatomic) enum VideoEffect effect;
+
+- (void)setCol:(int)c R:(float)r g:(float)g b:(float)b;
 
 - (void)newVideoFrame:(CMSampleBufferRef)sbuf;
 
