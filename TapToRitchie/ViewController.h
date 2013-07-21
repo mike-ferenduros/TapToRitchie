@@ -9,21 +9,24 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import <GLKit/GLKit.h>
+#import <deque>
 #import "VideoView.h"
 
 @interface ViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
 {
-	AVCaptureSession *			capSesh;
-	AVCaptureDevice *			capCam;
-	AVCaptureVideoDataOutput *	capDataOut;
+	AVCaptureSession *				capSesh;
+	AVCaptureDevice *				capCam;
+	AVCaptureVideoDataOutput *		capDataOut;
 
-	VideoView *					mainView;
+	VideoView *						mainView;
 
-	NSDate *					zoomStarted;
-	NSTimer *					zoomTimer;
-	NSMutableArray *			bufferedFrames;
-	
-	UITapGestureRecognizer *	tapper;
+	NSDate *						zoomStarted;
+	NSTimer *						zoomTimer;
+
+	std::deque<CMSampleBufferRef>	bufferedFrames;
+	int								skipCounter;
+
+	UITapGestureRecognizer *		tapper;
 }
 
 - (id)init;

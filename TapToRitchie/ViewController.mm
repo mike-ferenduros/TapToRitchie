@@ -16,7 +16,6 @@
 {
 	if( self = [super init] )
 	{
-		bufferedFrames = [NSMutableArray array];
 	}
 	return self;
 }
@@ -50,39 +49,76 @@
 	[self.view addGestureRecognizer:tapper];
 }
 
-- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sbuf fromConnection:(AVCaptureConnection *)connection
 {
-	CFRetain( sampleBuffer );
+	CFRetain( sbuf );
 
 	dispatch_async( dispatch_get_main_queue(),
 	^{
-		//For now just drop frames while we animate
-		if( !zoomStarted )
-			[mainView newVideoFrame:sampleBuffer];
+		if( zoomStarted || !bufferedFrames.empty() )
+		{
+			//We're either Ritchieing or catching up
+			//Keep every 5th frame only
 
-		CFRelease( sampleBuffer );
+			if( (skipCounter % 5) == 0 )
+				bufferedFrames.push_back( sbuf );
+			else
+				CFRelease( sbuf );
+
+			skipCounter++;
+
+			//If we're catching up, catch up
+			//FIXME: Too speedy (and a bit hacky) maybe we need to do this on a separate timer
+			if( !zoomStarted && !bufferedFrames.empty() )
+			{
+				CMSampleBufferRef sbuf2 = bufferedFrames.front();
+				bufferedFrames.pop_front();
+				[mainView newVideoFrame:sbuf2];
+				CFRelease( sbuf2 );
+			}
+		}
+		else
+		{
+			//Pass it on for display
+			[mainView newVideoFrame:sbuf];
+			CFRelease( sbuf );
+		}
 	} );
 }
 
 
 
-- (void)tapped:(UITapGestureRecognizer*)gest
+- (void)beginRitchie
 {
-	if( tapper.state!=UIGestureRecognizerStateRecognized || zoomStarted )
-		return;
-
 	zoomStarted = [NSDate date];
 	zoomTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f/30.0f target:self selector:@selector(animTick:) userInfo:nil repeats:YES];
+	skipCounter = 0;
 
 	mainView.effect = EFFECT_THRESHHOLD;
 	[mainView setCol:0 R:0.2 g:0.2 b:0.2];
 	[mainView setCol:1 R:0.5 g:0.7 b:0.2];
 }
 
+- (void)endRitchie
+{
+	mainView.effect = EFFECT_NONE;
+	zoomStarted = nil;
+	[zoomTimer invalidate];
+	zoomTimer = nil;
+}
 
-#define ZOOM_DURATION 0.3f
-#define ANIM_DURATION 2.5f
-#define ANIM_ZOOM 1.8f
+
+
+- (void)tapped:(UITapGestureRecognizer*)gest
+{
+	if( tapper.state==UIGestureRecognizerStateRecognized && !zoomStarted )
+		[self beginRitchie];
+}
+
+
+#define ZOOM_DURATION 0.15f
+#define ANIM_DURATION 2.0f
+#define ANIM_ZOOM 1.5f
 
 - (void)animTick:(NSTimer*)timer
 {
@@ -104,10 +140,7 @@
 	}
 	else
 	{
-		mainView.effect = EFFECT_NONE;
-		zoomStarted = nil;
-		[zoomTimer invalidate];
-		zoomTimer = nil;
+		[self endRitchie];
 	}
 }
 
