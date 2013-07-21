@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "GangsterNamer.h"
 #import <GLKit/GLKit.h>
 
 
@@ -16,6 +17,7 @@
 {
 	if( self = [super init] )
 	{
+		[GangsterNamer loadStrings];
 	}
 	return self;
 }
@@ -86,10 +88,28 @@
 	} );
 }
 
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didDropSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
+{
+	dispatch_async( dispatch_get_main_queue(),
+	^{
+		//If we're catching up, catch up
+		if( !zoomStarted && !bufferedFrames.empty() )
+		{
+			CMSampleBufferRef sbuf2 = bufferedFrames.front();
+			bufferedFrames.pop_front();
+			[mainView newVideoFrame:sbuf2];
+			CFRelease( sbuf2 );
+		}
+	});
+}
+
+
 
 
 - (void)beginRitchie
 {
+	NSLog(@"%@", [GangsterNamer randomName:NO]);
+
 	zoomStarted = [NSDate date];
 	zoomTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f/30.0f target:self selector:@selector(animTick:) userInfo:nil repeats:YES];
 	skipCounter = 0;

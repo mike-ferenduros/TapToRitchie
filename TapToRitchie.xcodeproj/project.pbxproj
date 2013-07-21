@@ -27,6 +27,11 @@
 		7742E31E179C69C100F5F27F /* vertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 7742E31C179C69C100F5F27F /* vertex.glsl */; };
 		774BA64F179C81A000029367 /* fragment_threshhold.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 774BA64E179C81A000029367 /* fragment_threshhold.glsl */; };
 		774BA651179C910900029367 /* fragment_halftone.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 774BA650179C910900029367 /* fragment_halftone.glsl */; };
+		774BA654179C992700029367 /* GangsterNamer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 774BA653179C992700029367 /* GangsterNamer.mm */; };
+		774BA656179C9B9000029367 /* adjectives.txt in Resources */ = {isa = PBXBuildFile; fileRef = 774BA655179C9B9000029367 /* adjectives.txt */; };
+		774BA659179C9BAB00029367 /* mnames.txt in Resources */ = {isa = PBXBuildFile; fileRef = 774BA657179C9BAA00029367 /* mnames.txt */; };
+		774BA65A179C9BAB00029367 /* nouns.txt in Resources */ = {isa = PBXBuildFile; fileRef = 774BA658179C9BAB00029367 /* nouns.txt */; };
+		774BA65C179C9BB000029367 /* fnames.txt in Resources */ = {isa = PBXBuildFile; fileRef = 774BA65B179C9BB000029367 /* fnames.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +61,12 @@
 		7742E31C179C69C100F5F27F /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
 		774BA64E179C81A000029367 /* fragment_threshhold.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment_threshhold.glsl; sourceTree = "<group>"; };
 		774BA650179C910900029367 /* fragment_halftone.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment_halftone.glsl; sourceTree = "<group>"; };
+		774BA652179C992700029367 /* GangsterNamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GangsterNamer.h; sourceTree = "<group>"; };
+		774BA653179C992700029367 /* GangsterNamer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GangsterNamer.mm; sourceTree = "<group>"; };
+		774BA655179C9B9000029367 /* adjectives.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = adjectives.txt; sourceTree = "<group>"; };
+		774BA657179C9BAA00029367 /* mnames.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mnames.txt; sourceTree = "<group>"; };
+		774BA658179C9BAB00029367 /* nouns.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nouns.txt; sourceTree = "<group>"; };
+		774BA65B179C9BB000029367 /* fnames.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fnames.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +129,12 @@
 				7742E300179C5F0000F5F27F /* ViewController.mm */,
 				7742E312179C625200F5F27F /* VideoView.h */,
 				7742E313179C625200F5F27F /* VideoView.mm */,
+				774BA652179C992700029367 /* GangsterNamer.h */,
+				774BA653179C992700029367 /* GangsterNamer.mm */,
+				774BA657179C9BAA00029367 /* mnames.txt */,
+				774BA65B179C9BB000029367 /* fnames.txt */,
+				774BA658179C9BAB00029367 /* nouns.txt */,
+				774BA655179C9B9000029367 /* adjectives.txt */,
 				7742E31F179C69CB00F5F27F /* glsl */,
 				7742E2EE179C5F0000F5F27F /* Supporting Files */,
 			);
@@ -202,12 +219,16 @@
 			files = (
 				7742E2F2179C5F0000F5F27F /* InfoPlist.strings in Resources */,
 				774BA64F179C81A000029367 /* fragment_threshhold.glsl in Resources */,
+				774BA65C179C9BB000029367 /* fnames.txt in Resources */,
+				774BA65A179C9BAB00029367 /* nouns.txt in Resources */,
 				774BA651179C910900029367 /* fragment_halftone.glsl in Resources */,
 				7742E2FA179C5F0000F5F27F /* Default.png in Resources */,
 				7742E2FC179C5F0000F5F27F /* Default@2x.png in Resources */,
 				7742E2FE179C5F0000F5F27F /* Default-568h@2x.png in Resources */,
+				774BA656179C9B9000029367 /* adjectives.txt in Resources */,
 				7742E31D179C69C100F5F27F /* fragment_passthru.glsl in Resources */,
 				7742E31E179C69C100F5F27F /* vertex.glsl in Resources */,
+				774BA659179C9BAB00029367 /* mnames.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				774BA654179C992700029367 /* GangsterNamer.mm in Sources */,
 				7742E2F4179C5F0000F5F27F /* main.m in Sources */,
 				7742E2F8179C5F0000F5F27F /* AppDelegate.mm in Sources */,
 				7742E301179C5F0000F5F27F /* ViewController.mm in Sources */,
