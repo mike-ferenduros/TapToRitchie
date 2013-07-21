@@ -94,7 +94,7 @@
 	zoomTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f/30.0f target:self selector:@selector(animTick:) userInfo:nil repeats:YES];
 	skipCounter = 0;
 
-	mainView.effect = EFFECT_THRESHHOLD;
+	mainView.effect = EFFECT_HALFTONE;
 	[mainView setCol:0 R:0.2 g:0.2 b:0.2];
 	[mainView setCol:1 R:0.5 g:0.7 b:0.2];
 }
@@ -111,7 +111,7 @@
 
 - (void)tapped:(UITapGestureRecognizer*)gest
 {
-	if( tapper.state==UIGestureRecognizerStateRecognized && !zoomStarted )
+	if( tapper.state==UIGestureRecognizerStateRecognized && !zoomStarted && bufferedFrames.empty() )
 		[self beginRitchie];
 }
 

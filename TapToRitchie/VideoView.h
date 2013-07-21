@@ -17,8 +17,11 @@
 	int						texWidth;
 	int						texHeight;
 
+	GLuint					dotTexture;
+
 	GLuint					passthroughShader;
 	GLuint					threshholdShader;
+	GLuint					halftoneShader;
 
 	float					cols[2][3];
 }
@@ -27,6 +30,7 @@ enum VideoEffect
 {
 	EFFECT_NONE = 0,
 	EFFECT_THRESHHOLD,
+	EFFECT_HALFTONE,
 };
 
 @property (nonatomic) float zoom;

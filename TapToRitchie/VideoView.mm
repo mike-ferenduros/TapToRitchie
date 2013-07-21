@@ -20,6 +20,38 @@ static void check_gl_error( void )
 	}
 }
 
+static GLuint makeDotTexture( void )
+{
+	unsigned char *pixels = new unsigned char [64*64];
+	for( int y = 0; y < 64; y++ )
+	{
+		float fy = float(y)/16.0f;
+		float sy = sin(fy*3.14159265f*2.0f);
+		for( int x = 0; x < 64; x++ )
+		{
+			float fx = float(x)/16.0f;
+			float sx = sin(fx*3.14159265f*2.0f);
+
+			float v = ((sx*sy)+1.0f) * 127.5f;
+
+			pixels[ x + y*64 ] = (v<0)?0 : (v>255 ? 255 : v);
+		}
+	}
+	
+	GLuint tex;
+	glGenTextures( 1, &tex );
+	glBindTexture( GL_TEXTURE_2D, tex );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+	glTexImage2D( GL_TEXTURE_2D, 0, GL_LUMINANCE, 64, 64, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, pixels );
+	
+	delete [] pixels;
+	
+	return tex;
+}
+
 @implementation VideoView (glsl)
 - (GLuint)compileShader:(NSString*)shaderName withType:(GLenum)shaderType prefix:(NSString*)prefix
 {
@@ -97,6 +129,8 @@ static void check_gl_error( void )
 		[EAGLContext setCurrentContext:self.context];
 		passthroughShader = [self compileProgramWithFragShader:@"fragment_passthru" vertShader:@"vertex"];
 		threshholdShader = [self compileProgramWithFragShader:@"fragment_threshhold" vertShader:@"vertex"];
+		halftoneShader = [self compileProgramWithFragShader:@"fragment_halftone" vertShader:@"vertex"];
+		dotTexture = makeDotTexture();
 		[EAGLContext setCurrentContext:nil];
 
 		_zoom = 1.0f;
@@ -203,6 +237,10 @@ static void check_gl_error( void )
 		case EFFECT_THRESHHOLD:
 			shader = threshholdShader;
 			break;
+
+		case EFFECT_HALFTONE:
+			shader = halftoneShader;
+			break;
 	}
 
 	glUseProgram( shader );
@@ -221,8 +259,13 @@ static void check_gl_error( void )
 	glEnableVertexAttribArray( 1 );
 	glBindAttribLocation( shader, 1, "st" );
 
+	glActiveTexture( GL_TEXTURE1 );
+	glBindTexture( GL_TEXTURE_2D, dotTexture );
+	glActiveTexture( GL_TEXTURE0 );
 	glBindTexture( GL_TEXTURE_2D, texture );
+
 	glUniform1i( glGetUniformLocation(shader,"tex"), 0 );
+	glUniform1i( glGetUniformLocation(shader,"dottex"), 1 );
 
 	glDrawArrays( GL_TRIANGLE_STRIP, 0, 4 );
 
