@@ -38,6 +38,7 @@
 	[capDataOut setVideoSettings:@{(__bridge NSString*)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_32BGRA)}];
 	dispatch_queue_t q = dispatch_queue_create( "CaptureVC", DISPATCH_QUEUE_SERIAL );
 	[capDataOut setSampleBufferDelegate:self queue:q];
+	capDataOut.alwaysDiscardsLateVideoFrames = NO;
 	[capSesh addOutput:capDataOut];
 }
 
