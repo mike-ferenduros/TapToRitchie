@@ -16,6 +16,7 @@
 {
 	if( self = [super init] )
 	{
+		bufferedFrames = [NSMutableArray array];
 	}
 	return self;
 }
@@ -44,6 +45,9 @@
     [super viewDidLoad];
 
 	[capSesh startRunning];
+	
+	tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+	[self.view addGestureRecognizer:tapper];
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
@@ -52,9 +56,54 @@
 
 	dispatch_async( dispatch_get_main_queue(),
 	^{
-		[mainView newVideoFrame:sampleBuffer];
+		//For now just drop frames while we animate
+		if( !zoomStarted )
+			[mainView newVideoFrame:sampleBuffer];
+
 		CFRelease( sampleBuffer );
 	} );
+}
+
+
+
+- (void)tapped:(UITapGestureRecognizer*)gest
+{
+	if( tapper.state!=UIGestureRecognizerStateRecognized || zoomStarted )
+		return;
+
+	zoomStarted = [NSDate date];
+	zoomTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f/30.0f target:self selector:@selector(animTick:) userInfo:nil repeats:YES];
+}
+
+
+#define ZOOM_DURATION 0.3f
+#define ANIM_DURATION 2.5f
+#define ANIM_ZOOM 1.8f
+
+- (void)animTick:(NSTimer*)timer
+{
+	NSTimeInterval elapsed = -[zoomStarted timeIntervalSinceNow];
+	if( elapsed < ZOOM_DURATION )
+	{
+		float t = elapsed/ZOOM_DURATION;
+		mainView.zoom = 1.0f + (ANIM_ZOOM-1.0f)*t;
+	}
+	else if( elapsed < ANIM_DURATION-ZOOM_DURATION )
+	{
+		if( mainView.zoom < ANIM_ZOOM )
+			mainView.zoom = ANIM_ZOOM;
+	}
+	else if( elapsed < ANIM_DURATION )
+	{
+		float t = (ANIM_DURATION-elapsed)/ZOOM_DURATION;
+		mainView.zoom = 1.0f + (ANIM_ZOOM-1.0f)*t;
+	}
+	else
+	{
+		zoomStarted = nil;
+		[zoomTimer invalidate];
+		zoomTimer = nil;
+	}
 }
 
 @end

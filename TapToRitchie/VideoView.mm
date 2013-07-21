@@ -97,6 +97,8 @@ static void check_gl_error( void )
 		[EAGLContext setCurrentContext:self.context];
 		passthroughShader = [self compileProgramWithFragShader:@"fragment_passthru" vertShader:@"vertex"];
 		[EAGLContext setCurrentContext:nil];
+
+		_zoom = 1.0f;
     }
     return self;
 }
@@ -118,6 +120,11 @@ static void check_gl_error( void )
 	}
 }
 
+- (void)setZoom:(float)z
+{
+	_zoom = z;
+	[self setNeedsDisplay];
+}
 
 - (void)reloadTexture
 {
@@ -170,12 +177,13 @@ static void check_gl_error( void )
 
 	glUseProgram( shader );
 
-	float xy[4][2] = { {-1,-1}, {-1,1}, {1,-1}, {1,1} };
+	float z = _zoom;
+	float xy[4][2] = { {-z,-z}, {-z,z}, {z,-z}, {z,z} };
 	glVertexAttribPointer( 0, 2, GL_FLOAT, GL_FALSE, 0, xy );
 	glEnableVertexAttribArray( 0 );
 	glBindAttribLocation( shader, 0, "xy" );
 
-	float  st[4][2] = { { 0, 0}, { 0,1}, {1, 0}, {1,1} };
+	float  st[4][2] = { {1,0}, {1,1}, {0,0}, {0,1} };
 	glVertexAttribPointer( 1, 2, GL_FLOAT, GL_FALSE, 0, st );
 	glEnableVertexAttribArray( 1 );
 	glBindAttribLocation( shader, 1, "st" );

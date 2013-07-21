@@ -20,6 +20,8 @@
 	GLuint					passthroughShader;
 }
 
+@property (nonatomic) float zoom;
+
 - (void)newVideoFrame:(CMSampleBufferRef)sbuf;
 
 @end

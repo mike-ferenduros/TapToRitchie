@@ -18,6 +18,12 @@
 	AVCaptureVideoDataOutput *	capDataOut;
 
 	VideoView *					mainView;
+
+	NSDate *					zoomStarted;
+	NSTimer *					zoomTimer;
+	NSMutableArray *			bufferedFrames;
+	
+	UITapGestureRecognizer *	tapper;
 }
 
 - (id)init;
