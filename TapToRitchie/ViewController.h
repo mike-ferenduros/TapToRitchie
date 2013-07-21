@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import <GLKit/GLKit.h>
+#import "VideoView.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
+{
+	AVCaptureSession *			capSesh;
+	AVCaptureDevice *			capCam;
+	AVCaptureVideoDataOutput *	capDataOut;
+
+	VideoView *					mainView;
+}
+
+- (id)init;
 
 @end

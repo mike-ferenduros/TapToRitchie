@@ -12,12 +12,19 @@
 		7742E2EC179C5F0000F5F27F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7742E2EB179C5F0000F5F27F /* CoreGraphics.framework */; };
 		7742E2F2179C5F0000F5F27F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7742E2F0179C5F0000F5F27F /* InfoPlist.strings */; };
 		7742E2F4179C5F0000F5F27F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7742E2F3179C5F0000F5F27F /* main.m */; };
-		7742E2F8179C5F0000F5F27F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7742E2F7179C5F0000F5F27F /* AppDelegate.m */; };
+		7742E2F8179C5F0000F5F27F /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7742E2F7179C5F0000F5F27F /* AppDelegate.mm */; };
 		7742E2FA179C5F0000F5F27F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7742E2F9179C5F0000F5F27F /* Default.png */; };
 		7742E2FC179C5F0000F5F27F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7742E2FB179C5F0000F5F27F /* Default@2x.png */; };
 		7742E2FE179C5F0000F5F27F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7742E2FD179C5F0000F5F27F /* Default-568h@2x.png */; };
-		7742E301179C5F0000F5F27F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7742E300179C5F0000F5F27F /* ViewController.m */; };
-		7742E304179C5F0000F5F27F /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7742E302179C5F0000F5F27F /* ViewController.xib */; };
+		7742E301179C5F0000F5F27F /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7742E300179C5F0000F5F27F /* ViewController.mm */; };
+		7742E30B179C5F1600F5F27F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7742E30A179C5F1600F5F27F /* AVFoundation.framework */; };
+		7742E30D179C606A00F5F27F /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7742E30C179C606A00F5F27F /* GLKit.framework */; };
+		7742E30F179C607100F5F27F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7742E30E179C607100F5F27F /* OpenGLES.framework */; };
+		7742E311179C614500F5F27F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7742E310179C614500F5F27F /* CoreVideo.framework */; };
+		7742E314179C625200F5F27F /* VideoView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7742E313179C625200F5F27F /* VideoView.mm */; };
+		7742E316179C637B00F5F27F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7742E315179C637B00F5F27F /* CoreMedia.framework */; };
+		7742E31D179C69C100F5F27F /* fragment_passthru.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 7742E31B179C69C100F5F27F /* fragment_passthru.glsl */; };
+		7742E31E179C69C100F5F27F /* vertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 7742E31C179C69C100F5F27F /* vertex.glsl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,13 +37,21 @@
 		7742E2F3179C5F0000F5F27F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7742E2F5179C5F0000F5F27F /* TapToRitchie-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TapToRitchie-Prefix.pch"; sourceTree = "<group>"; };
 		7742E2F6179C5F0000F5F27F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		7742E2F7179C5F0000F5F27F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7742E2F7179C5F0000F5F27F /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		7742E2F9179C5F0000F5F27F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		7742E2FB179C5F0000F5F27F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		7742E2FD179C5F0000F5F27F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		7742E2FF179C5F0000F5F27F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		7742E300179C5F0000F5F27F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		7742E303179C5F0000F5F27F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		7742E300179C5F0000F5F27F /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		7742E30A179C5F1600F5F27F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		7742E30C179C606A00F5F27F /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		7742E30E179C607100F5F27F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		7742E310179C614500F5F27F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		7742E312179C625200F5F27F /* VideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoView.h; sourceTree = "<group>"; };
+		7742E313179C625200F5F27F /* VideoView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoView.mm; sourceTree = "<group>"; };
+		7742E315179C637B00F5F27F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		7742E31B179C69C100F5F27F /* fragment_passthru.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment_passthru.glsl; sourceTree = "<group>"; };
+		7742E31C179C69C100F5F27F /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +62,11 @@
 				7742E2E8179C5F0000F5F27F /* UIKit.framework in Frameworks */,
 				7742E2EA179C5F0000F5F27F /* Foundation.framework in Frameworks */,
 				7742E2EC179C5F0000F5F27F /* CoreGraphics.framework in Frameworks */,
+				7742E30B179C5F1600F5F27F /* AVFoundation.framework in Frameworks */,
+				7742E30D179C606A00F5F27F /* GLKit.framework in Frameworks */,
+				7742E30F179C607100F5F27F /* OpenGLES.framework in Frameworks */,
+				7742E311179C614500F5F27F /* CoreVideo.framework in Frameworks */,
+				7742E316179C637B00F5F27F /* CoreMedia.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +93,11 @@
 		7742E2E6179C5F0000F5F27F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7742E315179C637B00F5F27F /* CoreMedia.framework */,
+				7742E310179C614500F5F27F /* CoreVideo.framework */,
+				7742E30E179C607100F5F27F /* OpenGLES.framework */,
+				7742E30C179C606A00F5F27F /* GLKit.framework */,
+				7742E30A179C5F1600F5F27F /* AVFoundation.framework */,
 				7742E2E7179C5F0000F5F27F /* UIKit.framework */,
 				7742E2E9179C5F0000F5F27F /* Foundation.framework */,
 				7742E2EB179C5F0000F5F27F /* CoreGraphics.framework */,
@@ -84,10 +109,12 @@
 			isa = PBXGroup;
 			children = (
 				7742E2F6179C5F0000F5F27F /* AppDelegate.h */,
-				7742E2F7179C5F0000F5F27F /* AppDelegate.m */,
+				7742E2F7179C5F0000F5F27F /* AppDelegate.mm */,
 				7742E2FF179C5F0000F5F27F /* ViewController.h */,
-				7742E300179C5F0000F5F27F /* ViewController.m */,
-				7742E302179C5F0000F5F27F /* ViewController.xib */,
+				7742E300179C5F0000F5F27F /* ViewController.mm */,
+				7742E312179C625200F5F27F /* VideoView.h */,
+				7742E313179C625200F5F27F /* VideoView.mm */,
+				7742E31F179C69CB00F5F27F /* glsl */,
 				7742E2EE179C5F0000F5F27F /* Supporting Files */,
 			);
 			path = TapToRitchie;
@@ -105,6 +132,15 @@
 				7742E2FD179C5F0000F5F27F /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7742E31F179C69CB00F5F27F /* glsl */ = {
+			isa = PBXGroup;
+			children = (
+				7742E31B179C69C100F5F27F /* fragment_passthru.glsl */,
+				7742E31C179C69C100F5F27F /* vertex.glsl */,
+			);
+			name = glsl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,7 +198,8 @@
 				7742E2FA179C5F0000F5F27F /* Default.png in Resources */,
 				7742E2FC179C5F0000F5F27F /* Default@2x.png in Resources */,
 				7742E2FE179C5F0000F5F27F /* Default-568h@2x.png in Resources */,
-				7742E304179C5F0000F5F27F /* ViewController.xib in Resources */,
+				7742E31D179C69C100F5F27F /* fragment_passthru.glsl in Resources */,
+				7742E31E179C69C100F5F27F /* vertex.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,8 +211,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7742E2F4179C5F0000F5F27F /* main.m in Sources */,
-				7742E2F8179C5F0000F5F27F /* AppDelegate.m in Sources */,
-				7742E301179C5F0000F5F27F /* ViewController.m in Sources */,
+				7742E2F8179C5F0000F5F27F /* AppDelegate.mm in Sources */,
+				7742E301179C5F0000F5F27F /* ViewController.mm in Sources */,
+				7742E314179C625200F5F27F /* VideoView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,14 +226,6 @@
 				7742E2F1179C5F0000F5F27F /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		7742E302179C5F0000F5F27F /* ViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7742E303179C5F0000F5F27F /* en */,
-			);
-			name = ViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -263,6 +293,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TapToRitchie/TapToRitchie-Prefix.pch";
 				INFOPLIST_FILE = "TapToRitchie/TapToRitchie-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -274,6 +305,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TapToRitchie/TapToRitchie-Prefix.pch";
 				INFOPLIST_FILE = "TapToRitchie/TapToRitchie-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
