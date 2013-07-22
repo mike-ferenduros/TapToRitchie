@@ -89,16 +89,6 @@ static int randy( int r )
 				CFRelease( sbuf );
 
 			skipCounter++;
-
-			//If we're catching up, catch up
-			//FIXME: Too speedy (and a bit hacky) maybe we need to do this on a separate timer
-			if( !zoomStarted && !bufferedFrames.empty() )
-			{
-				CMSampleBufferRef sbuf2 = bufferedFrames.front();
-				bufferedFrames.pop_front();
-				[mainView newVideoFrame:sbuf2];
-				CFRelease( sbuf2 );
-			}
 		}
 		else
 		{
@@ -109,20 +99,22 @@ static int randy( int r )
 	} );
 }
 
-- (void)captureOutput:(AVCaptureOutput *)captureOutput didDropSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
+- (void)catchUpTick:(NSTimer*)timer
 {
-	dispatch_async( dispatch_get_main_queue(),
-	^{
-		//If we're catching up, catch up
-		if( !zoomStarted && !bufferedFrames.empty() )
-		{
-			CMSampleBufferRef sbuf2 = bufferedFrames.front();
-			bufferedFrames.pop_front();
-			[mainView newVideoFrame:sbuf2];
-			CFRelease( sbuf2 );
-		}
-	});
+	if( bufferedFrames.empty() )
+	{
+		[zoomTimer invalidate];
+		zoomTimer = nil;
+	}
+	else
+	{
+		CMSampleBufferRef sbuf2 = bufferedFrames.front();
+		bufferedFrames.pop_front();
+		[mainView newVideoFrame:sbuf2];
+		CFRelease( sbuf2 );
+	}
 }
+
 
 
 - (void)setTextLeft:(NSString*)str
@@ -153,6 +145,7 @@ static int randy( int r )
 	str = [str stringByAppendingString:@" ★"];
 	label.numberOfLines = 1;
 	CGRect f = self.view.bounds;
+	f.size.height *= 0.7f;
 	label.frame = CGRectInset( f, 16, 16 );
 	label.textAlignment = NSTextAlignmentLeft;
 	label.text = str;
@@ -163,6 +156,7 @@ static int randy( int r )
 	str = [@"★ " stringByAppendingString:str];
 	label.numberOfLines = 1;
 	CGRect f = self.view.bounds;
+	f.size.height *= 0.7f;
 	label.frame = CGRectInset( f, 16, 16 );
 	label.textAlignment = NSTextAlignmentRight;
 	label.text = str;
@@ -278,6 +272,9 @@ static int randy( int r )
 	[zoomTimer invalidate];
 	zoomTimer = nil;
 	label.hidden = YES;
+
+	//Catch up
+	zoomTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f/30.0f target:self selector:@selector(catchUpTick:) userInfo:nil repeats:YES];
 }
 
 
@@ -293,7 +290,7 @@ static int randy( int r )
 
 #define ZOOM_DURATION 0.15f
 #define ANIM_DURATION 2.0f
-#define ANIM_ZOOM 1.5f
+#define ANIM_ZOOM 2.2f
 
 - (void)animTick:(NSTimer*)timer
 {
