@@ -256,7 +256,7 @@ static int randy( int r )
 	}
 
 
-	[mainView setZoom:1.4f];
+	[mainView setZoom:2.2f];
 
 	zoomStarted = [NSDate date];
 	skipCounter = 0;
@@ -289,8 +289,7 @@ static int randy( int r )
 
 
 #define ZOOM_DURATION 0.15f
-#define ANIM_DURATION 2.0f
-#define ANIM_ZOOM 2.2f
+#define ANIM_DURATION 1.5f
 
 - (void)animTick:(NSTimer*)timer
 {
