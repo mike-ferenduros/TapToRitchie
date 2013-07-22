@@ -41,11 +41,7 @@ static NSString *word( NSArray *words )
 	NSArray *names = female ? fnames : mnames;
 
 	int what = (rand()/100) % 10;
-	if( what == 0 )
-	{
-		return [NSString stringWithFormat:@"The %@", word(nouns)];
-	}
-	else if( what < 5 )
+	if( what < 3 )
 	{
 		return [NSString stringWithFormat:@"%@ the %@", word(names), word(nouns)];
 	}

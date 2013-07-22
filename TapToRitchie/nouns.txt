@@ -17,3 +17,8 @@ Boxer
 Bookie
 Gob
 Grocer
+Manc
+Scouser
+Geordie
+Cockney
+Haircut

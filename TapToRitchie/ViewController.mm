@@ -101,17 +101,18 @@ static int randy( int r )
 
 - (void)catchUpTick:(NSTimer*)timer
 {
-	if( bufferedFrames.empty() )
-	{
-		[zoomTimer invalidate];
-		zoomTimer = nil;
-	}
-	else
+	if( !bufferedFrames.empty() )
 	{
 		CMSampleBufferRef sbuf2 = bufferedFrames.front();
 		bufferedFrames.pop_front();
 		[mainView newVideoFrame:sbuf2];
 		CFRelease( sbuf2 );
+	}
+
+	if( bufferedFrames.empty() )
+	{
+		[zoomTimer invalidate];
+		zoomTimer = nil;
 	}
 }
 
@@ -140,22 +141,26 @@ static int randy( int r )
 	label.text = str;
 }
 
-- (void)setTextCLeft:(NSString*)str
+- (void)setTextCLeft:(NSString*)str upper:(BOOL)upper
 {
 	str = [str stringByAppendingString:@" ★"];
 	label.numberOfLines = 1;
 	CGRect f = self.view.bounds;
+	if( !upper )
+		f.origin.y += f.size.height*0.3f;
 	f.size.height *= 0.7f;
 	label.frame = CGRectInset( f, 16, 16 );
 	label.textAlignment = NSTextAlignmentLeft;
 	label.text = str;
 }
 
-- (void)setTextCRight:(NSString*)str
+- (void)setTextCRight:(NSString*)str upper:(BOOL)upper
 {
 	str = [@"★ " stringByAppendingString:str];
 	label.numberOfLines = 1;
 	CGRect f = self.view.bounds;
+	if( !upper )
+		f.origin.y += f.size.height*0.3f;
 	f.size.height *= 0.7f;
 	label.frame = CGRectInset( f, 16, 16 );
 	label.textAlignment = NSTextAlignmentRight;
@@ -190,6 +195,7 @@ static int randy( int r )
 - (void)beginRitchie:(BOOL)isFemale center:(CGPoint)center
 {
 	int tappedLeft = center.x < self.view.bounds.size.width*0.5f;
+	int tappedUp = center.y < self.view.bounds.size.height*0.5f;
 
 	static const float cols[][3] =
 	{
@@ -228,9 +234,9 @@ static int randy( int r )
 		case 0:
 			[mainView setInsetLeft:0 right:0 top:0 bottom:0];
 			if( tappedLeft )
-				[self setTextCRight:name];
+				[self setTextCRight:name upper:!tappedUp];
 			else
-				[self setTextCLeft:name];
+				[self setTextCLeft:name upper:!tappedUp];
 			break;
 
 		case 1:
