@@ -1,5 +1,6 @@
 Mad
 Psycho
+Angry
 Stinky
 Greasy
 Tall
@@ -21,5 +22,8 @@ Soap-Dodger
 Lightweight
 Fat-fingered
 Light-fingered
+Butterfingers
 Polish
 Albino
+Velvet
+Smooth

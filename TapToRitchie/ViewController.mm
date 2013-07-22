@@ -193,10 +193,8 @@ static int randy( int r )
 }
 
 
-- (void)beginRitchie:(BOOL)isFemale
+- (void)beginRitchie:(BOOL)isFemale center:(CGPoint)center
 {
-	NSString *name = [[GangsterNamer randomName:isFemale] uppercaseString];
-
 	static const float cols[][3] =
 	{
 		{ 0.5, 0.7, 0.2 },
@@ -212,6 +210,10 @@ static int randy( int r )
 	[mainView setCol:0 R:0 g:0 b:0];
 	[mainView setCol:1 R:col[0] g:col[1] b:col[2]];
 	[mainView setCol:2 R:col[0] g:col[1] b:col[2]];
+
+	[mainView setCenter:center];
+
+	NSString *name = [[GangsterNamer randomName:isFemale] uppercaseString];
 
 	switch( randy(3) )
 	{
@@ -273,7 +275,7 @@ static int randy( int r )
 {
 	if( gest.state==UIGestureRecognizerStateRecognized && !zoomStarted && bufferedFrames.empty() )
 	{
-		[self beginRitchie:(gest==twoTapper)];
+		[self beginRitchie:(gest==twoTapper) center:[gest locationInView:self.view]];
 	}
 }
 

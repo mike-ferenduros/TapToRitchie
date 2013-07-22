@@ -13,3 +13,5 @@ Thief
 Con
 Poser
 Albino
+Boxer
+Bookie

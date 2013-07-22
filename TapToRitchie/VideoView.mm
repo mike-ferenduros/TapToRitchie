@@ -193,6 +193,15 @@ static GLuint makeDotTexture( void )
 	}
 }
 
+- (void)setCenter:(CGPoint)c
+{
+	float scale = [[UIScreen mainScreen] scale];
+	_center = c;
+	_center.x *= scale;
+	_center.y *= scale;
+	[self setNeedsDisplay];
+}
+
 - (void)reloadTexture
 {
 	check_gl_error();
@@ -275,9 +284,21 @@ static GLuint makeDotTexture( void )
 	glUniform3f( glGetUniformLocation(shader,"col1"), cols[0][0], cols[0][1], cols[0][2] );
 	glUniform3f( glGetUniformLocation(shader,"col2"), cols[1][0], cols[1][1], cols[1][2] );
 
+	//Center tapped point but don't go offscreen
+	float cx = (1.0f - (_center.x*2.0f/float(self.drawableWidth)));
+	float cy = ((_center.y*2.0f/float(self.drawableHeight)) - 1.0f);
+	if( fabsf(cx) > _zoom-1 )	cx = cx>0 ? _zoom-1 : 1-_zoom;
+	if( fabsf(cy) > _zoom-1 )	cy = cy>0 ? _zoom-1 : 1-_zoom;
+	cx *= _tween;
+	cy *= _tween;
+
+	float wx = ((insl+insr) / float(self.drawableWidth)) - 1.0f;
+	float wy = ((inst+insb) / float(self.drawableHeight)) - 1.0f;
+	cx += wx;
+	cy += wy;
 
 	float z = 1.0f + (_zoom-1.0f)*_tween;
-	float xy[4][2] = { {-z,-z}, {-z,z}, {z,-z}, {z,z} };
+	float xy[4][2] = { {cx-z,cy-z}, {cx-z,cy+z}, {cx+z,cy-z}, {cx+z,cy+z} };
 	glVertexAttribPointer( 0, 2, GL_FLOAT, GL_FALSE, 0, xy );
 	glEnableVertexAttribArray( 0 );
 	glBindAttribLocation( shader, 0, "xy" );
