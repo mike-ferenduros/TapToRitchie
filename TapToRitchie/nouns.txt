@@ -25,5 +25,13 @@ Albino
 Boxer
 Bookie
 Butcher
+Barber
+Plumber
 Grocer
 Fence
+Weasel
+Beast
+Gent
+Brain
+Comedian
+Bull

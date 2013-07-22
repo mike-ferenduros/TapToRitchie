@@ -13,7 +13,7 @@
 
 int randy( int r )
 {
-	return ((rand()>>8) + rand()) % r;
+	return ((rand()>>8) ^ rand()) % r;
 }
 
 

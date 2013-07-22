@@ -38,8 +38,7 @@ static NSString *word( NSArray *words )
 
 + (NSString*)randomName
 {
-	int what = randy(10);
-	if( what < 3 )
+	if( randy(2)==0 )
 	{
 		return [NSString stringWithFormat:@"%@ the %@", word(names), word(nouns)];
 	}
