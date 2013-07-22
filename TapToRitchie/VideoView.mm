@@ -175,10 +175,12 @@ static GLuint makeDotTexture( void )
 
 - (void)setInsetLeft:(int)l right:(int)r top:(int)t bottom:(int)b
 {
-	inset[0] = l;
-	inset[1] = t;
-	inset[2] = r;
-	inset[3] = b;
+	float scale = [[UIScreen mainScreen] scale];
+	inset[0] = l * scale;
+	inset[1] = t * scale;
+	inset[2] = r * scale;
+	inset[3] = b * scale;
+
 	[self setNeedsDisplay];
 }
 

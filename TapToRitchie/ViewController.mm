@@ -125,15 +125,85 @@ static int randy( int r )
 }
 
 
+- (void)setTextLeft:(NSString*)str
+{
+	str = [[str componentsSeparatedByString:@" "] componentsJoinedByString:@"\n"];
+	label.numberOfLines = 0;
+	CGRect f = self.view.bounds;
+	f.size.width /= 2;
+	label.frame = CGRectInset( f, 16, 16 );
+	label.textAlignment = NSTextAlignmentRight;
+	label.text = str;
+}
+
+- (void)setTextRight:(NSString*)str
+{
+	str = [[str componentsSeparatedByString:@" "] componentsJoinedByString:@"\n"];
+	label.numberOfLines = 0;
+	CGRect f = self.view.bounds;
+	f.size.width /= 2;
+	f.origin.x += f.size.width;
+	label.frame = CGRectInset( f, 16, 16 );
+	label.textAlignment = NSTextAlignmentLeft;
+	label.text = str;
+}
+
+- (void)setTextCLeft:(NSString*)str
+{
+	str = [str stringByAppendingString:@" ★"];
+	label.numberOfLines = 1;
+	CGRect f = self.view.bounds;
+	label.frame = CGRectInset( f, 16, 16 );
+	label.textAlignment = NSTextAlignmentLeft;
+	label.text = str;
+}
+
+- (void)setTextCRight:(NSString*)str
+{
+	str = [@"★ " stringByAppendingString:str];
+	label.numberOfLines = 1;
+	CGRect f = self.view.bounds;
+	label.frame = CGRectInset( f, 16, 16 );
+	label.textAlignment = NSTextAlignmentRight;
+	label.text = str;
+}
+
+- (void)setTextBLeft:(NSString*)str
+{
+	str = [str stringByAppendingString:@" ★"];
+	label.numberOfLines = 1;
+	CGRect f = self.view.bounds;
+	f.origin.y = f.size.height-64;
+	f.size.height = 64;
+	label.frame = CGRectInset( f, 16, 16 );
+	label.textAlignment = NSTextAlignmentLeft;
+	label.text = str;
+}
+
+- (void)setTextBRight:(NSString*)str
+{
+	str = [@"★ " stringByAppendingString:str];
+	label.numberOfLines = 1;
+	CGRect f = self.view.bounds;
+	f.origin.y = f.size.height-64;
+	f.size.height = 64;
+	label.frame = CGRectInset( f, 16, 16 );
+	label.textAlignment = NSTextAlignmentRight;
+	label.text = str;
+}
+
 
 - (void)beginRitchie:(BOOL)isFemale
 {
-	label.text = [[GangsterNamer randomName:isFemale] uppercaseString];
+	NSString *name = [[GangsterNamer randomName:isFemale] uppercaseString];
 
 	static const float cols[][3] =
 	{
 		{ 0.5, 0.7, 0.2 },
-		{ 0.7, 0.5, 0.2 }
+		{ 0.7, 0.5, 0.2 },
+		{ 1.0, 0.4, 0.2 },
+		{ 1.0, 0.24, 0.8 },
+		{ 0.47, 0.72, 1.0 },
 	};
 	int ncols = sizeof(cols) / sizeof(cols[0]);
 	int c = randy( ncols );
@@ -143,27 +213,41 @@ static int randy( int r )
 	[mainView setCol:1 R:col[0] g:col[1] b:col[2]];
 	[mainView setCol:2 R:col[0] g:col[1] b:col[2]];
 
-	switch( randy(2) )
+	switch( randy(3) )
 	{
 		case 0:
+		case 1:
 			mainView.effect = EFFECT_HALFTONE;
 			break;
 
-		case 1:
+		case 2:
 			mainView.effect = EFFECT_THRESHHOLD;
 			break;
 	}
 
-	switch( randy(2) )
+	switch( randy(4) )
 	{
 		case 0:
 			[mainView setInsetLeft:0 right:0 top:0 bottom:0];
+			[self setTextCLeft:name];
 			break;
 
 		case 1:
-			[mainView setInsetLeft:0 right:0 top:200 bottom:200];
+			[mainView setInsetLeft:0 right:0 top:75 bottom:75];
+			[self setTextBRight:name];
+			break;
+
+		case 2:
+			[mainView setInsetLeft:240 right:0 top:0 bottom:0];
+			[self setTextLeft:name];
+			break;
+
+		case 3:
+			[mainView setInsetLeft:0 right:240 top:0 bottom:0];
+			[self setTextRight:name];
 			break;
 	}
+
 	
 	[mainView setZoom:1.4f];
 

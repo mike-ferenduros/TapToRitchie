@@ -4,7 +4,6 @@ Harry
 Gary
 Micky
 John
-Johnny
 Sammy
 Ricky
 Paul
@@ -13,3 +12,4 @@ Boris
 Stavros
 Sven
 George
+Pete
