@@ -155,6 +155,15 @@ static GLuint makeDotTexture( void )
 	}
 }
 
+- (void)setTween:(float)t
+{
+	if( _tween != t )
+	{
+		_tween = t;
+		[self setNeedsDisplay];
+	}
+}
+
 - (void)setZoom:(float)z
 {
 	if( _zoom != z )
@@ -162,6 +171,15 @@ static GLuint makeDotTexture( void )
 		_zoom = z;
 		[self setNeedsDisplay];
 	}
+}
+
+- (void)setInsetLeft:(int)l right:(int)r top:(int)t bottom:(int)b
+{
+	inset[0] = l;
+	inset[1] = t;
+	inset[2] = r;
+	inset[3] = b;
+	[self setNeedsDisplay];
 }
 
 - (void)setEffect:(enum VideoEffect)e
@@ -217,7 +235,8 @@ static GLuint makeDotTexture( void )
 
 - (void)drawRect:(CGRect)rect
 {
-	glClearColor( 0, 0, 0, 1 );
+	glDisable( GL_SCISSOR_TEST );
+	glClearColor( cols[2][0], cols[2][1], cols[2][2], 1 );
 	glClear( GL_COLOR_BUFFER_BIT );
 
 	check_gl_error();
@@ -226,6 +245,13 @@ static GLuint makeDotTexture( void )
 		[self reloadTexture];
 
 	glViewport( 0, 0, self.drawableWidth, self.drawableHeight );
+	
+	float insl = inset[0]*_tween;
+	float inst = inset[1]*_tween;
+	float insr = self.drawableWidth - inset[2]*_tween;
+	float insb = self.drawableHeight - inset[3]*_tween;
+	glScissor( insl, inst, insr-insl, insb-inst );
+	glEnable( GL_SCISSOR_TEST );
 
 	GLuint shader;
 	switch( _effect )
@@ -248,7 +274,7 @@ static GLuint makeDotTexture( void )
 	glUniform3f( glGetUniformLocation(shader,"col2"), cols[1][0], cols[1][1], cols[1][2] );
 
 
-	float z = _zoom;
+	float z = 1.0f + (_zoom-1.0f)*_tween;
 	float xy[4][2] = { {-z,-z}, {-z,z}, {z,-z}, {z,z} };
 	glVertexAttribPointer( 0, 2, GL_FLOAT, GL_FALSE, 0, xy );
 	glEnableVertexAttribArray( 0 );

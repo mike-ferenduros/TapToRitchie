@@ -18,7 +18,6 @@ static NSArray *loadStringsFile( NSString *fname )
 }
 
 static NSArray *adjectives = nil;
-static NSArray *names = nil;
 static NSArray *mnames = nil;
 static NSArray *fnames = nil;
 static NSArray *nouns = nil;

@@ -23,7 +23,8 @@
 	GLuint					threshholdShader;
 	GLuint					halftoneShader;
 
-	float					cols[2][3];
+	float					inset[4];
+	float					cols[3][3];
 }
 
 enum VideoEffect
@@ -33,10 +34,12 @@ enum VideoEffect
 	EFFECT_HALFTONE,
 };
 
+@property (nonatomic) float tween;
 @property (nonatomic) float zoom;
 @property (nonatomic) enum VideoEffect effect;
 
 - (void)setCol:(int)c R:(float)r g:(float)g b:(float)b;
+- (void)setInsetLeft:(int)l right:(int)r top:(int)t bottom:(int)b;
 
 - (void)newVideoFrame:(CMSampleBufferRef)sbuf;
 

@@ -2,3 +2,7 @@ Blade
 Psycho
 Nutter
 Greek
+Russian
+Beard
+Hat
+Cheapskate

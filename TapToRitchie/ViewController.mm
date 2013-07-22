@@ -11,6 +11,12 @@
 #import <GLKit/GLKit.h>
 
 
+static int randy( int r )
+{
+	return (rand()/100) % r;
+}
+
+
 @implementation ViewController
 
 - (id)init
@@ -124,9 +130,42 @@
 {
 	label.text = [[GangsterNamer randomName:isFemale] uppercaseString];
 
-	mainView.effect = EFFECT_HALFTONE;
-	[mainView setCol:0 R:0.2 g:0.2 b:0.2];
-	[mainView setCol:1 R:0.5 g:0.7 b:0.2];
+	static const float cols[][3] =
+	{
+		{ 0.5, 0.7, 0.2 },
+		{ 0.7, 0.5, 0.2 }
+	};
+	int ncols = sizeof(cols) / sizeof(cols[0]);
+	int c = randy( ncols );
+	const float *col = cols[c];
+
+	[mainView setCol:0 R:0 g:0 b:0];
+	[mainView setCol:1 R:col[0] g:col[1] b:col[2]];
+	[mainView setCol:2 R:col[0] g:col[1] b:col[2]];
+
+	switch( randy(2) )
+	{
+		case 0:
+			mainView.effect = EFFECT_HALFTONE;
+			break;
+
+		case 1:
+			mainView.effect = EFFECT_THRESHHOLD;
+			break;
+	}
+
+	switch( randy(2) )
+	{
+		case 0:
+			[mainView setInsetLeft:0 right:0 top:0 bottom:0];
+			break;
+
+		case 1:
+			[mainView setInsetLeft:0 right:0 top:200 bottom:200];
+			break;
+	}
+	
+	[mainView setZoom:1.4f];
 
 	zoomStarted = [NSDate date];
 	skipCounter = 0;
@@ -137,6 +176,7 @@
 - (void)endRitchie
 {
 	mainView.effect = EFFECT_NONE;
+	mainView.tween = 0.0f;
 	zoomStarted = nil;
 	[zoomTimer invalidate];
 	zoomTimer = nil;
@@ -163,20 +203,18 @@
 	NSTimeInterval elapsed = -[zoomStarted timeIntervalSinceNow];
 	if( elapsed < ZOOM_DURATION )
 	{
-		float t = elapsed/ZOOM_DURATION;
-		mainView.zoom = 1.0f + (ANIM_ZOOM-1.0f)*t;
+		mainView.tween = elapsed/ZOOM_DURATION;
 	}
 	else if( elapsed < ANIM_DURATION-ZOOM_DURATION )
 	{
 		label.hidden = NO;
-		if( mainView.zoom < ANIM_ZOOM )
-			mainView.zoom = ANIM_ZOOM;
+		if( mainView.tween < 1.0f )
+			mainView.tween = 1.0f;
 	}
 	else if( elapsed < ANIM_DURATION )
 	{
 		label.hidden = YES;
-		float t = (ANIM_DURATION-elapsed)/ZOOM_DURATION;
-		mainView.zoom = 1.0f + (ANIM_ZOOM-1.0f)*t;
+		mainView.tween = (ANIM_DURATION-elapsed)/ZOOM_DURATION;
 	}
 	else
 	{

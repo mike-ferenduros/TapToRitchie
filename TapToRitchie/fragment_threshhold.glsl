@@ -10,7 +10,9 @@ uniform vec3 col2;
 void main()
 {
 	vec3 col = texture2D( tex, frag_st ).rgb;
-	float i = (((col.r+col.g+col.b)-1.5)*20.0)+0.5;
+
+	float i = dot( col, col );
+
 	gl_FragColor = vec4(
 		mix( col1, col2, clamp(i,0.0,1.0) ),
 		1.0

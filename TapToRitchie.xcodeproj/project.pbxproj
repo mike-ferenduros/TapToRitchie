@@ -127,15 +127,8 @@
 				7742E2F7179C5F0000F5F27F /* AppDelegate.mm */,
 				7742E2FF179C5F0000F5F27F /* ViewController.h */,
 				7742E300179C5F0000F5F27F /* ViewController.mm */,
-				7742E312179C625200F5F27F /* VideoView.h */,
-				7742E313179C625200F5F27F /* VideoView.mm */,
-				774BA652179C992700029367 /* GangsterNamer.h */,
-				774BA653179C992700029367 /* GangsterNamer.mm */,
-				774BA657179C9BAA00029367 /* mnames.txt */,
-				774BA65B179C9BB000029367 /* fnames.txt */,
-				774BA658179C9BAB00029367 /* nouns.txt */,
-				774BA655179C9B9000029367 /* adjectives.txt */,
-				7742E31F179C69CB00F5F27F /* glsl */,
+				7742E31F179C69CB00F5F27F /* Video */,
+				77C8C627179D1AE800061F99 /* Namer */,
 				7742E2EE179C5F0000F5F27F /* Supporting Files */,
 			);
 			path = TapToRitchie;
@@ -155,15 +148,30 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		7742E31F179C69CB00F5F27F /* glsl */ = {
+		7742E31F179C69CB00F5F27F /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				7742E312179C625200F5F27F /* VideoView.h */,
+				7742E313179C625200F5F27F /* VideoView.mm */,
 				7742E31B179C69C100F5F27F /* fragment_passthru.glsl */,
 				774BA64E179C81A000029367 /* fragment_threshhold.glsl */,
 				774BA650179C910900029367 /* fragment_halftone.glsl */,
 				7742E31C179C69C100F5F27F /* vertex.glsl */,
 			);
-			name = glsl;
+			name = Video;
+			sourceTree = "<group>";
+		};
+		77C8C627179D1AE800061F99 /* Namer */ = {
+			isa = PBXGroup;
+			children = (
+				774BA652179C992700029367 /* GangsterNamer.h */,
+				774BA653179C992700029367 /* GangsterNamer.mm */,
+				774BA657179C9BAA00029367 /* mnames.txt */,
+				774BA65B179C9BB000029367 /* fnames.txt */,
+				774BA658179C9BAB00029367 /* nouns.txt */,
+				774BA655179C9B9000029367 /* adjectives.txt */,
+			);
+			name = Namer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
