@@ -8,6 +8,8 @@
 
 #import "GangsterNamer.h"
 
+extern int randy( int r );
+
 @implementation GangsterNamer
 
 static NSArray *loadStringsFile( NSString *fname )
@@ -24,7 +26,7 @@ static NSArray *nouns = nil;
 
 static NSString *word( NSArray *words )
 {
-	int i = (rand()/100) % words.count;
+	int i = randy( words.count );
 	return [words objectAtIndex:i];
 }
 
@@ -40,7 +42,7 @@ static NSString *word( NSArray *words )
 {
 	NSArray *names = female ? fnames : mnames;
 
-	int what = (rand()/100) % 10;
+	int what = randy(10);
 	if( what < 3 )
 	{
 		return [NSString stringWithFormat:@"%@ the %@", word(names), word(nouns)];

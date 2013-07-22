@@ -11,9 +11,9 @@
 #import <GLKit/GLKit.h>
 
 
-static int randy( int r )
+int randy( int r )
 {
-	return (rand()/100) % r;
+	return ((rand()>>8) + rand()) % r;
 }
 
 
