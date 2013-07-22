@@ -283,6 +283,7 @@ static GLuint makeDotTexture( void )
 	glUseProgram( shader );
 	glUniform3f( glGetUniformLocation(shader,"col1"), cols[0][0], cols[0][1], cols[0][2] );
 	glUniform3f( glGetUniformLocation(shader,"col2"), cols[1][0], cols[1][1], cols[1][2] );
+	glUniform2f( glGetUniformLocation(shader,"screensize"), self.drawableWidth, self.drawableHeight );
 
 	//Center tapped point but don't go offscreen
 	float cx = (1.0f - (_center.x*2.0f/float(self.drawableWidth)));

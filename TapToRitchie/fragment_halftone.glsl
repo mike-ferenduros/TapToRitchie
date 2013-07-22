@@ -4,6 +4,7 @@ uniform sampler2D tex;
 uniform sampler2D dottex;
 
 varying vec2 frag_st;
+varying vec2 dots_st;
 
 uniform vec3 col1;
 uniform vec3 col2;
@@ -13,8 +14,7 @@ void main()
 	vec3 col = texture2D( tex, frag_st ).rgb;
 	float i = (col.r+col.g+col.b) * (1.0/3.0);
 
-	//FIXME: Dependent texture-read here. Pass in proper texcoords you lazy bastard.
-	float dotval = texture2D( dottex, gl_FragCoord.xy*0.015 ).r;
+	float dotval = texture2D( dottex, dots_st ).r;
 
 	i = ((i-dotval)*10.0)+0.5;
 

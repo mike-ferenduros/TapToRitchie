@@ -147,8 +147,8 @@ int randy( int r )
 	label.numberOfLines = 1;
 	CGRect f = self.view.bounds;
 	if( !upper )
-		f.origin.y += f.size.height*0.3f;
-	f.size.height *= 0.7f;
+		f.origin.y += f.size.height*0.5f;
+	f.size.height *= 0.5f;
 	label.frame = CGRectInset( f, 16, 16 );
 	label.textAlignment = NSTextAlignmentLeft;
 	label.text = str;
@@ -160,8 +160,8 @@ int randy( int r )
 	label.numberOfLines = 1;
 	CGRect f = self.view.bounds;
 	if( !upper )
-		f.origin.y += f.size.height*0.3f;
-	f.size.height *= 0.7f;
+		f.origin.y += f.size.height*0.5f;
+	f.size.height *= 0.5f;
 	label.frame = CGRectInset( f, 16, 16 );
 	label.textAlignment = NSTextAlignmentRight;
 	label.text = str;
