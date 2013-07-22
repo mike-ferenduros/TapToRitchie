@@ -116,7 +116,6 @@ int randy( int r )
 
 - (void)setTextLeft:(NSString*)str
 {
-	str = [[str componentsSeparatedByString:@" "] componentsJoinedByString:@"\n"];
 	label.numberOfLines = 0;
 	CGRect f = self.view.bounds;
 	f.size.width /= 2;
@@ -127,7 +126,6 @@ int randy( int r )
 
 - (void)setTextRight:(NSString*)str
 {
-	str = [[str componentsSeparatedByString:@" "] componentsJoinedByString:@"\n"];
 	label.numberOfLines = 0;
 	CGRect f = self.view.bounds;
 	f.size.width /= 2;
