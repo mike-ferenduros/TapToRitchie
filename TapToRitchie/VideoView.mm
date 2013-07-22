@@ -303,7 +303,13 @@ static GLuint makeDotTexture( void )
 	glEnableVertexAttribArray( 0 );
 	glBindAttribLocation( shader, 0, "xy" );
 
-	float  st[4][2] = { {1,0}, {1,1}, {0,0}, {0,1} };
+	const float st0[4][2] = { {1,0}, {1,1}, {0,0}, {0,1} };
+	const float st1[4][2] = { {0,1}, {0,0}, {1,1}, {1,0} };
+	const float *st;
+	if( [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft )
+		st = &st0[0][0];
+	else
+		st = &st1[0][0];
 	glVertexAttribPointer( 1, 2, GL_FLOAT, GL_FALSE, 0, st );
 	glEnableVertexAttribArray( 1 );
 	glBindAttribLocation( shader, 1, "st" );

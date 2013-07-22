@@ -1,11 +1,9 @@
 Mad
 Psycho
 Angry
-Stinky
 Greasy
 Tall
 Fat
-Nasty
 Turkish
 Blind
 One-eyed
@@ -18,7 +16,6 @@ Hairy
 Cheapskate
 Gorgeous
 Dirty
-Soap-Dodger
 Lightweight
 Fat-fingered
 Light-fingered
@@ -27,9 +24,8 @@ Polish
 Albino
 Velvet
 Smooth
-Broken
 Broken-tooth
-Two-faces
+Two-faced
 Four-eye
 Doctor
 Swedish
