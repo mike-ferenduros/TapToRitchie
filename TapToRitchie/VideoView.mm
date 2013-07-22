@@ -196,9 +196,9 @@ static GLuint makeDotTexture( void )
 - (void)setZCenter:(CGPoint)c
 {
 	float scale = [[UIScreen mainScreen] scale];
-	_zcenter = c;
-	_zcenter.x *= scale;
-	_zcenter.y *= scale;
+	_zCenter = c;
+	_zCenter.x *= scale;
+	_zCenter.y *= scale;
 	[self setNeedsDisplay];
 }
 
@@ -287,8 +287,8 @@ static GLuint makeDotTexture( void )
 	glUniform2f( glGetUniformLocation(shader,"screensize"), self.drawableWidth*scale, self.drawableHeight*scale );
 
 	//Center tapped point but don't go offscreen
-	float cx = (1.0f - (_zcenter.x*2.0f/float(self.drawableWidth)));
-	float cy = ((_zcenter.y*2.0f/float(self.drawableHeight)) - 1.0f);
+	float cx = (1.0f - (_zCenter.x*2.0f/float(self.drawableWidth)));
+	float cy = ((_zCenter.y*2.0f/float(self.drawableHeight)) - 1.0f);
 	if( fabsf(cx) > _zoom-1 )	cx = cx>0 ? _zoom-1 : 1-_zoom;
 	if( fabsf(cy) > _zoom-1 )	cy = cy>0 ? _zoom-1 : 1-_zoom;
 	cx *= _tween;

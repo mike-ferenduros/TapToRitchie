@@ -29,6 +29,18 @@ int randy( int r=2 )
 }
 
 
+- (AVCaptureDevice*)camera
+{
+#if 0
+	for( AVCaptureDevice *cam in [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo] )
+	{
+		if( cam.position == AVCaptureDevicePositionFront )
+			return cam;
+	}
+#endif
+	return [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+}
+
 - (void)loadView
 {
 	self.view = mainView = [[VideoView alloc] initWithFrame:CGRectMake(0,0,300,300)];
@@ -36,7 +48,7 @@ int randy( int r=2 )
 	capSesh = [[AVCaptureSession alloc] init];
 	capSesh.sessionPreset = AVCaptureSessionPreset640x480;
 
-	capCam = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+	capCam = [self camera];
 	AVCaptureDeviceInput *camDev = [AVCaptureDeviceInput deviceInputWithDevice:capCam error:nil];
 	[capSesh addInput:camDev];
 
@@ -207,7 +219,7 @@ int randy( int r=2 )
 	[mainView setCol:1 R:col[0] g:col[1] b:col[2]];
 	[mainView setCol:2 R:col[0] g:col[1] b:col[2]];
 
-	[mainView setCenter:center];
+	[mainView setZCenter:center];
 
 	NSString *name = [[GangsterNamer randomName] uppercaseString];
 
