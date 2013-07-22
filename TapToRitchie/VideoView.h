@@ -37,7 +37,7 @@ enum VideoEffect
 @property (nonatomic) float tween;
 @property (nonatomic) float zoom;
 @property (nonatomic) enum VideoEffect effect;
-@property (nonatomic) CGPoint center;
+@property (nonatomic) CGPoint zcenter;
 
 - (void)setCol:(int)c R:(float)r g:(float)g b:(float)b;
 - (void)setInsetLeft:(int)l right:(int)r top:(int)t bottom:(int)b;

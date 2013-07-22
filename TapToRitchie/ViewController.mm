@@ -11,7 +11,7 @@
 #import <GLKit/GLKit.h>
 
 
-int randy( int r )
+int randy( int r=2 )
 {
 	return ((rand()>>8) ^ rand()) % r;
 }
@@ -211,17 +211,7 @@ int randy( int r )
 
 	NSString *name = [[GangsterNamer randomName] uppercaseString];
 
-	switch( randy(3) )
-	{
-		case 0:
-		case 1:
-			mainView.effect = EFFECT_HALFTONE;
-			break;
-
-		case 2:
-			mainView.effect = EFFECT_THRESHHOLD;
-			break;
-	}
+	mainView.effect = randy(3)==0 ? EFFECT_THRESHHOLD : EFFECT_HALFTONE;
 
 	switch( randy(3) )
 	{
@@ -242,7 +232,7 @@ int randy( int r )
 			break;
 
 		case 2:
-			if( randy(2)==0 )
+			if( randy() )
 			{
 				[mainView setInsetLeft:0 right:240 top:0 bottom:0];
 				[self setTextRight:name];
