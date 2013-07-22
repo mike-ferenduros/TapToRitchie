@@ -31,7 +31,6 @@
 		774BA656179C9B9000029367 /* adjectives.txt in Resources */ = {isa = PBXBuildFile; fileRef = 774BA655179C9B9000029367 /* adjectives.txt */; };
 		774BA659179C9BAB00029367 /* mnames.txt in Resources */ = {isa = PBXBuildFile; fileRef = 774BA657179C9BAA00029367 /* mnames.txt */; };
 		774BA65A179C9BAB00029367 /* nouns.txt in Resources */ = {isa = PBXBuildFile; fileRef = 774BA658179C9BAB00029367 /* nouns.txt */; };
-		774BA65C179C9BB000029367 /* fnames.txt in Resources */ = {isa = PBXBuildFile; fileRef = 774BA65B179C9BB000029367 /* fnames.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,7 +65,6 @@
 		774BA655179C9B9000029367 /* adjectives.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = adjectives.txt; sourceTree = "<group>"; };
 		774BA657179C9BAA00029367 /* mnames.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mnames.txt; sourceTree = "<group>"; };
 		774BA658179C9BAB00029367 /* nouns.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nouns.txt; sourceTree = "<group>"; };
-		774BA65B179C9BB000029367 /* fnames.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fnames.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,9 +165,8 @@
 				774BA652179C992700029367 /* GangsterNamer.h */,
 				774BA653179C992700029367 /* GangsterNamer.mm */,
 				774BA657179C9BAA00029367 /* mnames.txt */,
-				774BA65B179C9BB000029367 /* fnames.txt */,
-				774BA658179C9BAB00029367 /* nouns.txt */,
 				774BA655179C9B9000029367 /* adjectives.txt */,
+				774BA658179C9BAB00029367 /* nouns.txt */,
 			);
 			name = Namer;
 			sourceTree = "<group>";
@@ -227,7 +224,6 @@
 			files = (
 				7742E2F2179C5F0000F5F27F /* InfoPlist.strings in Resources */,
 				774BA64F179C81A000029367 /* fragment_threshhold.glsl in Resources */,
-				774BA65C179C9BB000029367 /* fnames.txt in Resources */,
 				774BA65A179C9BAB00029367 /* nouns.txt in Resources */,
 				774BA651179C910900029367 /* fragment_halftone.glsl in Resources */,
 				7742E2FA179C5F0000F5F27F /* Default.png in Resources */,

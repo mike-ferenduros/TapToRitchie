@@ -1,6 +1,5 @@
 Mad
 Psycho
-Angry
 Greasy
 Tall
 Fat
@@ -19,16 +18,12 @@ Dirty
 Lightweight
 Fat-fingered
 Light-fingered
-Butterfingers
 Polish
 Albino
 Velvet
 Broken-tooth
 Two-faced
 Four-eye
-Doctor
-Swedish
-Scouser
-Geordie
-Cockney
+Doc
 Lanky
+Rockabilly

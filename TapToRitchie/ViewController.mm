@@ -66,10 +66,6 @@ int randy( int r )
 
 	tapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
 	[self.view addGestureRecognizer:tapper];
-
-	twoTapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
-	twoTapper.numberOfTouchesRequired = 2;
-	[self.view addGestureRecognizer:twoTapper];
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sbuf fromConnection:(AVCaptureConnection *)connection
@@ -192,7 +188,7 @@ int randy( int r )
 }
 
 
-- (void)beginRitchie:(BOOL)isFemale center:(CGPoint)center
+- (void)beginRitchieWithCenter:(CGPoint)center
 {
 	int tappedLeft = center.x < self.view.bounds.size.width*0.5f;
 	int tappedUp = center.y < self.view.bounds.size.height*0.5f;
@@ -215,7 +211,7 @@ int randy( int r )
 
 	[mainView setCenter:center];
 
-	NSString *name = [[GangsterNamer randomName:isFemale] uppercaseString];
+	NSString *name = [[GangsterNamer randomName] uppercaseString];
 
 	switch( randy(3) )
 	{
@@ -289,7 +285,7 @@ int randy( int r )
 {
 	if( gest.state==UIGestureRecognizerStateRecognized && !zoomStarted && bufferedFrames.empty() )
 	{
-		[self beginRitchie:(gest==twoTapper) center:[gest locationInView:self.view]];
+		[self beginRitchieWithCenter:[gest locationInView:self.view]];
 	}
 }
 

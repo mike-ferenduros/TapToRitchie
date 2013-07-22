@@ -1,7 +1,4 @@
 Barry
-Larry
-Harry
-Gary
 Micky
 John
 Sammy
@@ -20,4 +17,4 @@ Mark
 Chas
 Kev
 Errol
-Dennis
+Den

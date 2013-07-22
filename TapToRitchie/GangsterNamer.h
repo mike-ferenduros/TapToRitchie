@@ -11,6 +11,6 @@
 @interface GangsterNamer : NSObject
 
 + (void)loadStrings;
-+ (NSString*)randomName:(BOOL)female;
++ (NSString*)randomName;
 
 @end

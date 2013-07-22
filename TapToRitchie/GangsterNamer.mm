@@ -20,8 +20,7 @@ static NSArray *loadStringsFile( NSString *fname )
 }
 
 static NSArray *adjectives = nil;
-static NSArray *mnames = nil;
-static NSArray *fnames = nil;
+static NSArray *names = nil;
 static NSArray *nouns = nil;
 
 static NSString *word( NSArray *words )
@@ -33,15 +32,12 @@ static NSString *word( NSArray *words )
 + (void)loadStrings
 {
 	adjectives = loadStringsFile( @"adjectives" );
-	mnames = loadStringsFile( @"mnames" );
-	fnames = loadStringsFile( @"fnames" );
+	names = loadStringsFile( @"mnames" );
 	nouns = loadStringsFile( @"nouns" );
 }
 
-+ (NSString*)randomName:(BOOL)female
++ (NSString*)randomName
 {
-	NSArray *names = female ? fnames : mnames;
-
 	int what = randy(10);
 	if( what < 3 )
 	{
