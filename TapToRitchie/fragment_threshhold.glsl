@@ -11,7 +11,8 @@ void main()
 {
 	vec3 col = texture2D( tex, frag_st ).rgb;
 
-	float i = dot( col, col );
+	float i = (col.r+col.g+col.b)*(1.0/3.0);
+	i = ((i-0.5) * 4.0) + 0.5;
 
 	gl_FragColor = vec4(
 		mix( col1, col2, clamp(i,0.0,1.0) ),
