@@ -195,6 +195,8 @@ static int randy( int r )
 
 - (void)beginRitchie:(BOOL)isFemale center:(CGPoint)center
 {
+	int tappedLeft = center.x < self.view.bounds.size.width*0.5f;
+
 	static const float cols[][3] =
 	{
 		{ 0.5, 0.7, 0.2 },
@@ -227,30 +229,39 @@ static int randy( int r )
 			break;
 	}
 
-	switch( randy(4) )
+	switch( randy(3) )
 	{
 		case 0:
 			[mainView setInsetLeft:0 right:0 top:0 bottom:0];
-			[self setTextCLeft:name];
+			if( tappedLeft )
+				[self setTextCRight:name];
+			else
+				[self setTextCLeft:name];
 			break;
 
 		case 1:
 			[mainView setInsetLeft:0 right:0 top:75 bottom:75];
-			[self setTextBRight:name];
+			if( tappedLeft )
+				[self setTextBRight:name];
+			else
+				[self setTextBLeft:name];
 			break;
 
 		case 2:
-			[mainView setInsetLeft:240 right:0 top:0 bottom:0];
-			[self setTextLeft:name];
-			break;
-
-		case 3:
-			[mainView setInsetLeft:0 right:240 top:0 bottom:0];
-			[self setTextRight:name];
+			if( randy(2)==0 )
+			{
+				[mainView setInsetLeft:0 right:240 top:0 bottom:0];
+				[self setTextRight:name];
+			}
+			else
+			{
+				[mainView setInsetLeft:240 right:0 top:0 bottom:0];
+				[self setTextLeft:name];
+			}
 			break;
 	}
 
-	
+
 	[mainView setZoom:1.4f];
 
 	zoomStarted = [NSDate date];

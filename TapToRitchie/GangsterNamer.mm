@@ -40,14 +40,19 @@ static NSString *word( NSArray *words )
 {
 	NSArray *names = female ? fnames : mnames;
 
-	switch( (rand()/100) % 3 )
+	int what = (rand()/100) % 10;
+	if( what == 0 )
 	{
-		case 0:		return [NSString stringWithFormat:@"The %@", word(nouns)];
-		case 1:		return [NSString stringWithFormat:@"%@ the %@", word(names), word(nouns)];
-		case 2:		return [NSString stringWithFormat:@"%@ %@", word(adjectives), word(names)];
+		return [NSString stringWithFormat:@"The %@", word(nouns)];
 	}
-
-	return nil;		//shut up compiler
+	else if( what < 5 )
+	{
+		return [NSString stringWithFormat:@"%@ the %@", word(names), word(nouns)];
+	}
+	else
+	{
+		return [NSString stringWithFormat:@"%@ %@", word(adjectives), word(names)];
+	}
 }
 
 @end

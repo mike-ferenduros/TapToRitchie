@@ -10,7 +10,7 @@ Turkish
 Blind
 One-eyed
 No-nose
-Half-nose
+Broken-nose
 Four-finger
 Left-handed
 Uzbek
@@ -27,3 +27,9 @@ Polish
 Albino
 Velvet
 Smooth
+Broken
+Broken-tooth
+Two-faces
+Four-eye
+Doctor
+Swedish
